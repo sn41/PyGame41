@@ -1,4 +1,4 @@
-[content.md](content.md)
+[content.md](../content.md)
 
 ### Функции
 
@@ -6,6 +6,7 @@
 - Функцию можно повторно использовать в других частях программы.
 - Функция может иметь параметры вызова
 - Функция может вернуть результат с помощью оператора return
+- Функции, которые не находят в конце оператор return, возвращают None
 
 Список методов можно посмотреть в документации:   
 [Например, методы для работы со строкой.](https://docs.python.org/3/library/stdtypes.html#string-methods)
@@ -59,7 +60,7 @@ print_age("Tom")
 def print_person(name, age=18):
     print(f"Name: {name}  Age: {age}")
 
-# Вызов функции с использованием именованния параметров
+# Вызов функции с использованием именования параметров
 print_person(age=22, name="Tom")
 print_person(name="Tom", age=22)
 print_person(name="Tom")
@@ -85,6 +86,23 @@ def print_3(name, /, age = 18, *, company):
 print_3("Sam", company ="Google")               # Name: Sam  Age: 18  company: Google
 print_3("Tom", 37, company ="JetBrains")        # Name: Tom  Age: 37  company: JetBrains
 print_3("Bob", company ="Microsoft", age = 42)  # Name: Bob  Age: 42  company: Microsoft
+
+def a_void_function():
+    a = 1
+    b = 2
+    c = a + b 
+    # неявно возвращается None
+ 
+x = a_void_function()   # None
+print(x)                # None
+
+def improper_return_function(a):
+    if (a % 2) == 0:
+        return True
+    # в случае, если условие не выполняется, неявно возвращается None
+ 
+x = improper_return_function(3) # None
+print(x)                        # None
 ```
 
 ### Локальные функции
@@ -220,7 +238,7 @@ def select_operation(choice):
     else:
         return multiply
 ```
-[content.md](content.md)
+[content.md](../content.md)
 
 
 

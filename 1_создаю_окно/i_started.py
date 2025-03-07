@@ -5,17 +5,23 @@ pygame.init()
 
 #---Создание окна--------------------------
 windowsSize = (800, 600) # первое значение - ширина, второе - высота
-flags= pygame.FULLSCREEN | pygame.RESIZABLE
+# flags= pygame.FULLSCREEN | pygame.RESIZABLE
+flags: int =  pygame.RESIZABLE
 # установим режим для display - для окна вывода
-pygame.display.set_mode(size = windowsSize, flags = flags)
+# pygame.display.set_mode(windowsSize, flags)
+pygame.display.set_mode(size = windowsSize)
 
 #---Главный игровой цикл-------------------
 # --- 1. Обработка списка всех событий, произошедших с последнего кадра.----------------
 run = True
+
 while run:
-    for e in pygame.event.get():    # get() возвращает список событий.
-        if e.type == pygame.QUIT:   # Это событие закрытие окна (pygame.QUIT)
+    list = pygame.event.get()
+    for event in list:    # get() возвращает список событий.
+        if event.type == pygame.QUIT:   # Это событие закрытие окна (pygame.QUIT)
             run = False             # да - выход из основного цикла
+        # else:
+
 
 # --- 2. Обновление состояния. Логика игры--------------
 # --- 3. Отрисовка -------------------------

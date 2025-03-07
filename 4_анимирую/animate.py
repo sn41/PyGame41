@@ -14,15 +14,17 @@ screen = pygame.display.set_mode(size = windowsSize, flags = pygame.RESIZABLE)
 # создаём объект таймера clock
 clock = pygame.time.Clock()
 # позиция для вывода окружности
-circle_pos = pygame.Vector2(100, 100)
+circle_pos = pygame.Vector2(0, 0)
 circle_radius = 40
 circle_color = "gray"
 
-screen_color = "white"
+# + 1. Добавим константу
+# дельта - изменение позиции между кадрами
+DELTA_POS = pygame.Vector2(10, 10)
+
 
 running = True
 
-#****** Исправьте код
 while running:
 # --- 1. Обработка списка всех событий, произошедших с последнего кадра.
     # poll for events
@@ -30,43 +32,34 @@ while running:
     for e in pygame.event.get():    # get() возвращает список событий.
         if e.type == pygame.QUIT:   # Это событие закрытие окна (pygame.QUIT)
             running = False             # да - выход из основного цикла
-        elif e.type == pygame.KEYDOWN:
-            if e.key == pygame.K_UP or e.key == pygame.K_w:
-                circle_pos.y -= 10
-                print(f'Движение вверх, клавиша: {pygame.key.name(e.key)}')
-
-            if e.key == pygame.K_DOWN or e.key == pygame.K_s:
-                circle_pos.y += 10
-                print(f'Движение вниз, клавиша: {pygame.key.name(e.key)}')
-
-        if e.key == pygame.K_LEFT or e.key == pygame.K_a:
-            circle_pos.y -= 10
-            print(f'Движение влево, клавиша: {pygame.key.name(e.key)}')
-
-        if e.key == pygame.K_RIGHT or e.key == pygame.K_d:
-            circle_pos.y += 10
-            print(f'Движение вправо, клавиша: {pygame.key.name(e.key)}')
 
 # --- 2. Обновление состояния.
+    # + 2 Добавим изменение позиции между кадрами
+    # Изменяем позицию
+    circle_pos = circle_pos + DELTA_POS
 
 # --- 3. Отрисовка
     # заполнить экран цветом, чтобы стереть все, что осталось от последнего кадра
-    # screen.fill("purple")
-    # screen.fill("black")
-    # screen.fill("white")
-    screen.fill(screen_color)
+    screen.fill("purple")
+
 
     # РИСУЙТЕ СВОЮ ИГРУ ЗДЕСЬ
 
     # рисуем окружность
-    pygame.draw.circle(screen, color = circle_color, center=circle_pos, radius=circle_radius)
+    pygame.draw.circle(screen, circle_color, circle_pos, circle_radius)
 
     # переверните flip() дисплей, чтобы вывести свою работу на экран
     # (есть слой памяти, который сейчас отображается, и тот на котором вы рисовали)
     # flip() меняети их местами
-    pygame.display.flip()
+    pygame.display.flip()   # update the screen
+
+    # + 3. Установим
+    # Задержка между кадрами пририсовки
+    pygame.time.delay(10)   # introduce a delay
 
     clock.tick(60) # ограничивает FPS до 60
+
+
 #-------------------------------------------
 # Освобождение всех ресурсов, связанных с библиотекой
 pygame.quit()
